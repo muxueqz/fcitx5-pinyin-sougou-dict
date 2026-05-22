@@ -20,11 +20,11 @@ jobs:
         id: date
         run: echo "date=$(date +%Y%m%d)" >> "$GITHUB_OUTPUT"
 
-      - name: Release
-        uses: ncipollo/release-action@v1
+      - name: Publish release on GitHub
+        uses: softprops/action-gh-release@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          artifacts: "sougou.dict,sougou.dict.yaml,sougou_dict.tar.gz"
-          commit: ${{ github.sha }}
-          tag: ${{ steps.date.outputs.date }}
-          allowUpdates: true
+          tag_name: ${{ steps.date.outputs.date }}
+          target_commitish: ${{ github.sha }}
+          files: "sougou.dict,sougou.dict.yaml,sougou_dict.tar.gz"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
