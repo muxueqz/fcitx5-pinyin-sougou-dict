@@ -6,6 +6,11 @@ on:
   pull_request:
     branches: ["main"]
   workflow_call:
+  repository_dispatch:
+  workflow_dispatch:
+  schedule:
+    - cron: "1 3 * * *"
+
 
 jobs:
   build:
